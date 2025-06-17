@@ -1,4 +1,4 @@
-## [문제 번호. Max Consecutive Ones]
+## [Max Consecutive Ones]
 
 ### 1. 문제 요약
 주어진 이진 배열(0과 1로만 이루어진 배열)에서, 연속적으로 나타나는 1의 최대 개수를 찾는 문제
