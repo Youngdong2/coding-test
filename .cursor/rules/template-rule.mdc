@@ -1,7 +1,5 @@
 ---
-description: 
-globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 아래는 마크다운 파일의 템플릿이야. 내가 속성과 문제 이름을 주면 속성 경로 아래 문제 이름 파일명을 갖는 md파일을 만들어.
 그리고 파일의 내용을 다음과 같이 적어줘.
