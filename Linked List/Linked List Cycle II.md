@@ -1,63 +1,47 @@
 ## Linked List Cycle II
 
 ### 1. 문제 요약
-연결 리스트에서 사이클이 존재하는지 확인하고, 사이클이 있다면 사이클이 시작되는 노드를 찾아 반환하는 문제입니다.
+연결 리스트에서 사이클이 존재하는지 확인하고, 사이클이 있다면 사이클이 시작되는 노드를 찾아 반환하는 문제.
 
 ### 2. 초기 접근 및 풀이
 
 #### 핵심 로직
-(처음 떠올렸던 아이디어를 순서대로 작성합니다.)
+- 해시 셋을 이용해 방문했던 노드들을 저장한다.
+- 한칸씩 전진하면서 방문 여부를 확인한다.
+- 만약 사이클이 없는 경우 언젠가는 리스트의 끝에 도달하게 된다.
 
 #### 초기 코드
 ```python
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        slow = head
-        fast = head
+        seen_nodes = set()
         
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+        current = head
+        while current:
+            if current in seen_nodes:
+                return current
             
-            if slow == fast:
-                finder = head
-                while finder != slow:
-                    finder = finder.next
-                    slow = slow.next
+            seen_nodes.add(current)
 
-                return finder
-            
+            current = current.next
+        
         return None
 ```
 
 #### 복잡도 분석
 
-- 시간 복잡도:
-- 공간 복잡도:
+- 시간 복잡도: O(N)
+- 공간 복잡도: O(N)
 
-### 3. 피드백 및 개선점
-(내 풀이의 비효율적인 부분이나 개선할 점을 작성합니다.)
-
-### 4. 최적화된 풀이
-
-#### 개선된 로직
-(개선된 아이디어를 작성합니다.)
-
-#### 최종 코드
-
-```python
-# 여기에 최종 코드를 붙여넣습니다.
-```
-
-#### 복잡도 분석
-
-- 시간 복잡도:
-- 공간 복잡도:
 
 ### 5. 핵심 정리 및 주요 원칙
 
 #### 핵심 정리
-(이 문제를 통해 배운 핵심 교훈을 한 문장으로 정리합니다.)
+연결 리스트를 순회하면서, 방문하는 모든 노드를 해시 셋(Hash Set)에 기록하고, 만약 이미 기록된 노드를 다시 만나게 되면 바로 그 노드가 사이클의 시작점이라고 판별하는 것
 
 #### 주요 원칙
-(문제를 풀며 깨달은 자신만의 원칙이나 데이터 순회 규칙 등을 기록합니다.) 
+해시 셋을 이용한 방문 기록: set 자료구조를 '방문 기록부'로 사용하여, 각 노드를 방문했는지 여부를 O(1)의 빠른 속도로 확인합니다.
+
+선형 탐색 (Linear Scan): 리스트의 head부터 next 포인터를 따라 한 번만 순회하여 문제를 해결합니다.
+
+최초의 중복이 곧 시작점: 이 방식에서는 순환 구간 내에서 처음으로 중복 발견되는 노드가 곧 사이클의 시작점이 됩니다. 이는 플로이드 알고리즘처럼 2단계에 걸친 추가 계산이 필요 없어 로직이 매우 직관적입니다.
